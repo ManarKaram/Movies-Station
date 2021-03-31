@@ -1,0 +1,28 @@
+.container {
+    padding: 40px 0;
+}
+.container .card {
+    
+    margin: 10px 10px;
+}
+.container .row {
+    display: flex;
+    justify-content: center;
+}
+.container .card .card-footer {
+    display: flex;
+    justify-content: space-between;
+}
+.container .card .card-footer i {
+    font-size: 25px;
+    cursor: pointer;
+}
+a {
+    cursor: pointer;
+}
+@media(min-width: 740px){
+   
+    .container .card {
+        width: calc(100%/3.2) !important;
+    }
+}

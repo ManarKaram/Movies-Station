@@ -1,0 +1,23 @@
+<div class="container row mx-auto">
+
+    <h1 class="m-2 text-center">Login</h1>
+    <form [formGroup]="loginForm" (submit)="submitForm()" class="p-5 mt-2 col col-12 col-md-8">
+        <div *ngIf="apiError" class="alert alert-danger" role="alert">
+            Invalid credintials
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input formControlName="email" type="email" class="form-control" id="email">
+            <app-form-errors [control]="loginForm.controls.email"></app-form-errors>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input formControlName="password" type="password" class="form-control" id="password">
+            <app-form-errors [control]="loginForm.controls.password"></app-form-errors>
+        </div>
+        <button [disabled]="(!loginForm.valid)" type="submit" class="btn btn-primary">Login <i *ngIf="loading"
+                class="fas fa-spinner fa-spin"></i></button>
+
+        <div class="col col-12 mt-4 text-end"> Don't have an account? <a routerLink="/register">Register</a></div>
+    </form>
+</div>

@@ -1,0 +1,37 @@
+<div class="container row mx-auto">
+
+    <h1 class="m-2 text-center">Register</h1>
+    <form [formGroup]="registrationForm" (submit)="submitForm()" class="p-5 mt-2 col col-12 col-md-8">
+        <div *ngIf="apiError" class="alert alert-danger" role="alert">
+            Something went wrong, please try again
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Full name</label>
+            <input formControlName="name" type="text" class="form-control" id="name">
+            <app-form-errors [control]="registrationForm.controls.name"></app-form-errors>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input formControlName="email" type="email" class="form-control" id="email">
+            <app-form-errors [control]="registrationForm.controls.email"></app-form-errors>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input formControlName="password" type="password" class="form-control" id="password">
+            <app-form-errors [control]="registrationForm.controls.password"></app-form-errors>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">
+            <app-form-errors [control]="registrationForm.controls.confirmPassword"></app-form-errors>
+            <small
+                *ngIf="registrationForm.valid && (registrationForm.controls.password.value !== registrationForm.controls.confirmPassword.value)"
+                class="text-danger">Password and confirm password missmatch</small>
+        </div>
+        <button
+            [disabled]="(!registrationForm.valid) || (registrationForm.controls.password.value !== registrationForm.controls.confirmPassword.value)"
+            type="submit" class="btn btn-primary">Submit <i *ngIf="loading" class="fas fa-spinner fa-spin"></i></button>
+
+        <div class="col col-12 mt-4 text-end"> Already have an account? <a routerLink="/login">login</a></div>
+    </form>
+</div>

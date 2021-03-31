@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">Welcome {{userName}} to Movies Station</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" (click)="filterMovies($event)">
+
+                <li class="nav-item">
+                    <a id="all" class="nav-link">All Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a id="liked" class="nav-link">Liked Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a id="fav" class="nav-link">Favourite Movies</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <!-- skeleton preloader -->
+    <div class="row" *ngIf="loading; else results">
+        <div class="card col col-12 skeleton skeleton-rect" style="
+                    --lines: 2; /* lines count */
+                    --rect-h: 150px;
+   
+        "></div>
+        <div class="card col col-12 skeleton skeleton-rect" style="
+                    --lines: 2; /* lines count */
+                    --rect-h: 150px;
+        "></div>
+        <div class="card col col-12 skeleton skeleton-rect" style="
+         --lines: 2; /* lines count */
+         --rect-h: 150px;
+         "></div>
+    </div>
+    <ng-template #results>
+        <div class="row">
+            <div *ngFor="let movie of moviesData" class="card col col-12 " style="width: 18rem;">
+                <div>
+                    <img [src]="movie?.poster ||'../../../assets/images/moviePosterUnavailable.jpg'"
+                        class="card-img-top" [alt]="movie?.title">
+                </div>
+                <div class="card-body">
+                    <h3>{{movie?.title}}</h3>
+                    <p class="card-text">{{movie?.description}}</p>
+                </div>
+                <div *ngIf="showBtns" class="card-footer my-2" (click)="likeFavUpdate($event, movie.id)">
+
+
+                    <!-- unfilled like -->
+                    <i *ngIf="!movie.liked" id="unliked" class="far fa-thumbs-up"></i>
+                    <!-- filled like -->
+                    <i *ngIf="movie.liked" id="liked" class="fas fa-thumbs-up"></i>
+
+
+                    <!-- unfilled heart -->
+                    <i *ngIf="!movie.fav" id="notfav" class="far fa-heart"></i>
+                    <!-- filled heart -->
+                    <i *ngIf="movie.fav" id="fav" class="fas fa-heart"></i>
+
+                </div>
+            </div>
+
+        </div>
+    </ng-template>
+    <div class="text-danger" *ngIf="!loading && apiError">
+        <h1 class="text-center">Something went wrong!</h1>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="err" *ngIf=" control && control.touched && control.errors">
+    <div *ngIf="control.errors.required">*Required</div>
+    <div *ngIf="control.errors.maxlength">*Maximum length {{control.errors.maxlength.requiredLength}} characters
+    </div>
+    <div *ngIf="control.errors.minlength">*Minimum length {{control.errors.minlength.requiredLength}} characters
+    </div>
+    <div *ngIf="control.errors.email || control.errors.pattern?.requiredPattern == emailRegex">
+        *Invalid email format
+    </div>
+    <div *ngIf="control.errors.pattern?.requiredPattern == passwordRegex">
+        *Password should contain capital letters, small letters, numbers, and special characters
+    </div>
+    <div *ngIf="control.errors.pattern?.requiredPattern == numericalRegex">
+        *Digits Only
+    </div>
+    <div *ngIf="control.errors.pattern?.requiredPattern == alphaRegex">
+        *Letters only
+    </div>
+    <div *ngIf="control.errors.unmatchedPasswords">
+        *New password and retyped password do not match.
+    </div>
+
+</div>
